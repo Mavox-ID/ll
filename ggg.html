@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shy Coffee - Секретный Бобёр</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            text-align: center;
+            padding: 2rem;
+        }
+        header {
+            background-color: #8B4513;
+            color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        canvas {
+            border: 1px solid #8B4513;
+            background-color: black; /* Фон для кода */
+            margin: 1rem auto;
+            display: block;
+        }
+        button {
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #A0522D;
+        }
+        a {
+            color: #8B4513;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Секретный Бобёр</h1>
+        <p>Ты нашёл пасхалку!</p>
+    </header>
+    <canvas id="beaverCanvas" width="400" height="400"></canvas>
+    <button onclick="drawBeaver()">Рисовать</button>
+    <p><a href="/">Вернуться на главную</a></p>
+
+    <script>
+        const canvas = document.getElementById("beaverCanvas");
+        const ctx = canvas.getContext("2d");
+        let image = new Image();
+        image.src = "/bob.png"; // Изображение из корня сайта
+
+        // Массив для отслеживания нарисованных пикселей
+        let drawnPixels = new Set();
+
+        function drawBeaver() {
+            // Очистка canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawnPixels.clear();
+
+            // Проверка загрузки изображения
+            image.onload = function() {
+                // Создаём временный canvas для получения данных изображения
+                let tempCanvas = document.createElement("canvas");
+                tempCanvas.width = 400;
+                tempCanvas.height = 400;
+                let tempCtx = tempCanvas.getContext("2d");
+                tempCtx.drawImage(image, 0, 0, 400, 400); // Масштабируем до 400x400
+                let imageData = tempCtx.getImageData(0, 0, 400, 400).data;
+
+                // Постепенное рисование
+                let pixelsDrawn = 0;
+                const totalPixels = 400 * 400;
+                const interval = setInterval(() => {
+                    // Рисуем 500 пикселей за раз
+                    for (let i = 0; i < 500 && pixelsDrawn < totalPixels; i++) {
+                        let x, y;
+                        do {
+                            x = Math.floor(Math.random() * 400);
+                            y = Math.floor(Math.random() * 400);
+                        } while (drawnPixels.has(x + "," + y)); // Проверяем, не нарисован ли пиксель
+
+                        drawnPixels.add(x + "," + y);
+                        pixelsDrawn++;
+
+                        // Проверяем, есть ли цвет в изображении
+                        let index = (y * 400 + x) * 4;
+                        let r = imageData[index];
+                        let g = imageData[index + 1];
+                        let b = imageData[index + 2];
+                        let a = imageData[index + 3];
+
+                        if (a > 0) { // Если пиксель не прозрачный
+                            // Рисуем 1 или 0 вместо пикселя
+                            ctx.font = "8px monospace";
+                            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+                            ctx.fillText(Math.random() > 0.5 ? "1" : "0", x, y);
+                        }
+                    }
+
+                    // Завершаем, когда все пиксели нарисованы
+                    if (pixelsDrawn >= totalPixels) {
+                        clearInterval(interval);
+                    }
+                }, 10); // Скорость появления пикселей
+            };
+
+            // Если изображение уже загружено
+            if (image.complete) {
+                image.onload();
+            }
+        }
+    </script>
+</body>
+</html>
