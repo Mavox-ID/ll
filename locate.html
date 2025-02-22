@@ -6,56 +6,71 @@
     <title>Shy Coffee - Где мы</title>
     <link rel="icon" type="image/x-icon" href="/shy.ico">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
             background-color: #f5f5f5;
             color: #333;
+            line-height: 1.6;
         }
         header {
-            background-color: #8B4513; /* Кофейный коричневый */
+            background-color: #8B4513;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 1rem;
         }
         header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.25rem);
             margin: 0;
-            font-size: 36px;
+        }
+        header p {
+            font-size: clamp(0.875rem, 3vw, 1.125rem);
         }
         .main {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 1rem auto 5rem;
+            padding: 1rem;
             background-color: white;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 5px;
         }
+        h2 {
+            color: #8B4513;
+            font-size: clamp(1.125rem, 4vw, 1.5rem);
+            margin-bottom: 1rem;
+        }
         .button-container {
-            margin: 20px 0;
+            margin: 1rem 0;
             text-align: center;
         }
         .map-button {
             background-color: #8B4513;
             color: white;
-            padding: 10px 20px;
+            padding: 0.5rem 1rem;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: clamp(0.875rem, 3vw, 1rem);
             cursor: pointer;
             text-decoration: none;
+            display: inline-block;
         }
         .map-button:hover {
-            background-color: #A0522D; /* Чуть светлее при наведении */
+            background-color: #A0522D;
         }
         footer {
             text-align: center;
-            padding: 10px;
+            padding: 0.5rem;
             background-color: #8B4513;
             color: white;
+            width: 100%;
             position: fixed;
             bottom: 0;
-            width: 100%;
+            left: 0;
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
         }
         a {
             color: #8B4513;
@@ -63,6 +78,22 @@
         }
         a:hover {
             text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            header {
+                padding: 0.75rem;
+            }
+            .main {
+                margin: 0.5rem;
+                padding: 0.75rem;
+            }
+            .map-button {
+                padding: 0.5rem;
+            }
+            footer {
+                padding: 0.75rem;
+                line-height: 1.2;
+            }
         }
     </style>
 </head>
@@ -78,10 +109,10 @@
             <a href="https://www.google.com/maps/place/RAIN+kava/@50.518389,30.2371652,17z/data=!3m1!4b1!4m6!3m5!1s0x472b33c4e6093543:0x949566837b5422e4!8m2!3d50.518389!4d30.2371652!16s%2Fg%2F11pwrqrrgs!5m1!1e4?entry=ttu&g_ep=EgoyMDI1MDIxOS4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-button">Посмотреть на карте</a>
         </div>
         <p>Нажми на кнопку выше, чтобы увидеть наше точное место в Google Maps. Заходи, если будешь рядом!</p>
-        <p>Вернуться на <a href="https://www.shycoffee.pp.ua">главную страницу</a>.</p>
+        <p>Вернуться на <a href="/">главную страницу</a>.</p>
     </div>
     <footer>
-        <p>© 2025 Shy Coffee. Updated for 22.02.25 to V.35. Все права и фото защищены.</p>
+        <p>© 2025 Shy Coffee. Updated for 22.02.25 to V.125. Все права и фото защищены.</p>
     </footer>
 </body>
 </html>

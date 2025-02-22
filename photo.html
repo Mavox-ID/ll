@@ -6,36 +6,48 @@
     <title>Shy Coffee - Фото</title>
     <link rel="icon" type="image/x-icon" href="/shy.ico">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
             background-color: #f5f5f5;
             color: #333;
+            line-height: 1.6;
         }
         header {
-            background-color: #8B4513; /* Кофейный коричневый */
+            background-color: #8B4513;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 1rem;
         }
         header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.25rem);
             margin: 0;
-            font-size: 36px;
+        }
+        header p {
+            font-size: clamp(0.875rem, 3vw, 1.125rem);
         }
         .main {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            margin: 1rem auto 5rem;
+            padding: 1rem;
             background-color: white;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 5px;
+        }
+        h2 {
+            color: #8B4513;
+            font-size: clamp(1.125rem, 4vw, 1.5rem);
+            margin-bottom: 1rem;
         }
         .photo-gallery {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 1rem;
         }
         .photo-gallery img {
             max-width: 100%;
@@ -45,12 +57,14 @@
         }
         footer {
             text-align: center;
-            padding: 10px;
+            padding: 0.5rem;
             background-color: #8B4513;
             color: white;
+            width: 100%;
             position: fixed;
             bottom: 0;
-            width: 100%;
+            left: 0;
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
         }
         a {
             color: #8B4513;
@@ -58,6 +72,22 @@
         }
         a:hover {
             text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            header {
+                padding: 0.75rem;
+            }
+            .main {
+                margin: 0.5rem;
+                padding: 0.75rem;
+            }
+            .photo-gallery {
+                gap: 0.5rem;
+            }
+            footer {
+                padding: 0.75rem;
+                line-height: 1.2;
+            }
         }
     </style>
 </head>
@@ -76,10 +106,10 @@
             <img src="/photo4.jpg" alt="Фото 4 - Shy Coffee">
             <img src="/photo5.jpg" alt="Фото 5 - Shy Coffee">
         </div>
-        <p>Вернуться на <a href="https://www.shycoffee.pp.ua">главную страницу</a>.</p>
+        <p>Вернуться на <a href="/">главную страницу</a>.</p>
     </div>
     <footer>
-        <p>© 2025 Shy Coffee. Updated for 22.02.25 to V.35. Все права и фото защищены.</p>
+        <p>© 2025 Shy Coffee. Updated for 22.02.25 to V.125. Все права и фото защищены.</p>
     </footer>
 </body>
 </html>

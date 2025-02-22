@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shy Coffee - Секретный Бобёр</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
             color: #333;
             text-align: center;
-            padding: 2rem;
+            padding: 1rem;
+            line-height: 1.6;
         }
         header {
             background-color: #8B4513;
@@ -20,20 +26,25 @@
         }
         header h1 {
             margin: 0;
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+        }
+        header p {
+            font-size: clamp(0.875rem, 3vw, 1rem);
         }
         canvas {
             border: 1px solid #8B4513;
-            background-color: black; /* Фон для кода */
+            background-color: white; /* Белый фон вместо чёрного */
             margin: 1rem auto;
             display: block;
+            max-width: 100%;
+            height: auto;
         }
         button {
             background-color: #8B4513;
             color: white;
             border: none;
             padding: 0.5rem 1rem;
-            font-size: 1rem;
+            font-size: clamp(0.875rem, 3vw, 1rem);
             cursor: pointer;
             border-radius: 5px;
         }
@@ -47,6 +58,33 @@
         a:hover {
             text-decoration: underline;
         }
+        footer {
+            text-align: center;
+            padding: 0.5rem;
+            background-color: #8B4513;
+            color: white;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+        }
+        @media (max-width: 600px) {
+            header {
+                padding: 0.75rem;
+            }
+            canvas {
+                width: 100%;
+                height: auto;
+            }
+            button {
+                padding: 0.5rem;
+            }
+            footer {
+                padding: 0.75rem;
+                line-height: 1.2;
+            }
+        }
     </style>
 </head>
 <body>
@@ -57,69 +95,38 @@
     <canvas id="beaverCanvas" width="400" height="400"></canvas>
     <button onclick="drawBeaver()">Рисовать</button>
     <p><a href="/">Вернуться на главную</a></p>
+    <footer>
+        <p>© 2025 Shy Coffee. Updated for 22.02.25 to V.125. Все права и фото защищены.</p>
+    </footer>
 
     <script>
         const canvas = document.getElementById("beaverCanvas");
         const ctx = canvas.getContext("2d");
         let image = new Image();
-        image.src = "/bob.png"; // Изображение из корня сайта
-
-        // Массив для отслеживания нарисованных пикселей
-        let drawnPixels = new Set();
+        image.src = "/bob.png";
 
         function drawBeaver() {
             // Очистка canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawnPixels.clear();
 
-            // Проверка загрузки изображения
             image.onload = function() {
-                // Создаём временный canvas для получения данных изображения
                 let tempCanvas = document.createElement("canvas");
                 tempCanvas.width = 400;
                 tempCanvas.height = 400;
                 let tempCtx = tempCanvas.getContext("2d");
-                tempCtx.drawImage(image, 0, 0, 400, 400); // Масштабируем до 400x400
-                let imageData = tempCtx.getImageData(0, 0, 400, 400).data;
-
-                // Постепенное рисование
-                let pixelsDrawn = 0;
-                const totalPixels = 400 * 400;
-                const interval = setInterval(() => {
-                    // Рисуем 500 пикселей за раз
-                    for (let i = 0; i < 500 && pixelsDrawn < totalPixels; i++) {
-                        let x, y;
-                        do {
-                            x = Math.floor(Math.random() * 400);
-                            y = Math.floor(Math.random() * 400);
-                        } while (drawnPixels.has(x + "," + y)); // Проверяем, не нарисован ли пиксель
-
-                        drawnPixels.add(x + "," + y);
-                        pixelsDrawn++;
-
-                        // Проверяем, есть ли цвет в изображении
-                        let index = (y * 400 + x) * 4;
-                        let r = imageData[index];
-                        let g = imageData[index + 1];
-                        let b = imageData[index + 2];
-                        let a = imageData[index + 3];
-
-                        if (a > 0) { // Если пиксель не прозрачный
-                            // Рисуем 1 или 0 вместо пикселя
-                            ctx.font = "8px monospace";
-                            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-                            ctx.fillText(Math.random() > 0.5 ? "1" : "0", x, y);
-                        }
+                tempCtx.drawImage(image, 0, 0, 400, 400);
+                let y = 0;
+                const drawLine = () => {
+                    if (y < 400) {
+                        let lineData = tempCtx.getImageData(0, y, 400, 1);
+                        ctx.putImageData(lineData, 0, y);
+                        y += 1;
+                        requestAnimationFrame(drawLine);
                     }
-
-                    // Завершаем, когда все пиксели нарисованы
-                    if (pixelsDrawn >= totalPixels) {
-                        clearInterval(interval);
-                    }
-                }, 10); // Скорость появления пикселей
+                };
+                drawLine();
             };
 
-            // Если изображение уже загружено
             if (image.complete) {
                 image.onload();
             }
