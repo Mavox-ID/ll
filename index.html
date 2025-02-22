@@ -58,9 +58,11 @@
             padding: 10px;
             background-color: #8B4513;
             color: white;
-            position: fixed;
-            bottom: 0;
             width: 100%;
+            position: fixed; /* Фиксируем внизу */
+            bottom: 0;
+            left: 0; /* Убеждаемся, что начинается с левого края */
+            box-sizing: border-box; /* Учитываем padding в ширине */
         }
     </style>
 </head>
@@ -72,7 +74,7 @@
     <nav>
         <a href="https://shycoffee.pp.ua/info.html" target="_blank">Инфо</a>
         <a href="https://shycoffee.pp.ua/locate.html" target="_blank">Где мы</a>
-        <a href="https://shycoffee.pp.ua/con.html" target="_blank">Контакты</a>
+        <a href="https://shycoffee.pp.ua/contact.html" target="_blank">Контакты</a>
     </nav>
     <div class="main">
         <div class="section" id="about">
@@ -90,7 +92,8 @@
             </div>
             <div class="assortment-item">
                 <strong>Сувениры</strong> - Брелки, открытки ручной работы.
-            
+            </div>
+        </div>
         <div class="section" id="location">
             <h2>Где мы</h2>
             <p>Ищи нас в Ирпене, Возле Еко-маркета при входе в Парк Незнайку. Работаем по разному, но всегда можно проверить :) с 12:00 до 20:00. Заходи, если рядом!</p>
