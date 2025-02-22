@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shy Coffee - Контакты</title>
+    <title>Shy Coffee - Фото</title>
     <link rel="icon" type="image/x-icon" href="/shy.ico">
     <style>
         body {
@@ -31,12 +31,17 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 5px;
         }
-        .contact-item {
-            margin: 15px 0;
-            line-height: 1.6;
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
         }
-        .contact-item strong {
-            color: #8B4513;
+        .photo-gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
         footer {
             text-align: center;
@@ -59,24 +64,18 @@
 <body>
     <header>
         <h1>Shy Coffee</h1>
-        <p>Связаться с нами</p>
+        <p>Наши фотографии</p>
     </header>
     <div class="main">
-        <h2>Контакты</h2>
-        <p>Хочешь заказать что-то? Или узнать о наличии или просто поболтать? Вот как нас найти:</p>
-        <div class="contact-item">
-            <strong>Адрес:</strong> Ирпень, Еко-маркет, при входе в Парк Незнайку!
+        <h2>Фото компании</h2>
+        <p>Вот несколько снимков нашего уютного ларька и того, что мы делаем!</p>
+        <div class="photo-gallery">
+            <img src="/photo1.jpg" alt="Фото 1 - Shy Coffee">
+            <img src="/photo2.jpg" alt="Фото 2 - Shy Coffee">
+            <img src="/photo3.jpg" alt="Фото 3 - Shy Coffee">
+            <img src="/photo4.jpg" alt="Фото 4 - Shy Coffee">
+            <img src="/photo5.jpg" alt="Фото 5 - Shy Coffee">
         </div>
-        <div class="contact-item">
-            <strong>Телефон:</strong> <a href="tel:+380668766770">+380 66 876 67 70</a>
-        </div>
-        <div class="contact-item">
-            <strong>Telegram:</strong> <a href="https://t.me/OSlinnux" target="_blank">@OSlinnux</a>
-        </div>
-        <div class="contact-item">
-            <strong>Viber:</strong> <a href="tel:+380668766770">+380 66 876 67 70</a>
-        </div>
-        <p>Пиши или звони — мы всегда рады ответить! Часы работы: 12:00–20:00, Работает в разное время!</p>
         <p>Вернуться на <a href="https://www.shycoffee.pp.ua">главную страницу</a>.</p>
     </div>
     <footer>
